@@ -59,7 +59,7 @@ try:
         cv2.imshow('frame', frame)
 
         # Exit loop if 'q' is pressed
-        if cv2.waitKey(25) & 0xFF == ord('q'):
+        if cv2.waitKey(100) & 0xFF == ord('q'):
             break
 finally:
     cap.release()
