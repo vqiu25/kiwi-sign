@@ -6,12 +6,16 @@
 <body>
     <h1>Live Camera Feed</h1>
     <video id="video" width="640" height="480" autoplay></video>
+    <div id="result"></div>
+    <div id="translated-result"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
     <script>
         const video = document.getElementById('video');
+        const resultDiv = document.getElementById('result');
+        const translatedResultDiv = document.getElementById('translated-result');
         const hands = new Hands({locateFile: (file) => {
             return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
         }});
@@ -57,9 +61,14 @@
                 },
                 body: `image=${encodeURIComponent(dataUrl)}`
             })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // Display the word and its translation received from the backend
+                resultDiv.innerText = `${data.word}`;
+                translatedResultDiv.innerText = `${data.translated_word}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
         }
     </script>
