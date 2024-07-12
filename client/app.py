@@ -32,10 +32,59 @@ def translate_to_maori(word):
     # Dummy function to simulate translation
     # Replace this with your actual translation API call
     translations = {
-        # update with all translations from the backend. 
         "Hello": "Kia ora",
         "Goodbye": "Haere rā",
-        "Thank you": "Ngā mihi"
+        "Thank you": "Ngā mihi",
+        # Alphabet (only including different terms)
+        "A": "Ā",
+        "E": "Ē",
+        "I": "Ī",
+        "O": "Ō",
+        "U": "Ū",
+        # Numbers (written out)
+        "Zero": "Kore",
+        "One": "Tahi",
+        "Two": "Rua",
+        "Three": "Toru",
+        "Four": "Whā",
+        "Five": "Rima",
+        "Six": "Ono",
+        "Seven": "Whitu",
+        "Eight": "Waru",
+        "Nine": "Iwa",
+        # Days of the week
+        "Monday": "Rāhina",
+        "Tuesday": "Rātū",
+        "Wednesday": "Rāapa",
+        "Thursday": "Rāpare",
+        "Friday": "Rāmere",
+        "Saturday": "Rāhoroi",
+        "Sunday": "Rātapu",
+        # Months
+        "January": "Kohitātea",
+        "February": "Hui-tanguru",
+        "March": "Poutū-te-rangi",
+        "April": "Paenga-whāwhā",
+        "May": "Haratua",
+        "June": "Pipiri",
+        "July": "Hōngongoi",
+        "August": "Here-turi-kōkā",
+        "September": "Mahuru",
+        "October": "Whiringa-ā-nuku",
+        "November": "Whiringa-ā-rangi",
+        "December": "Hakihea",
+        # Introductory Terms
+        "Welcome": "Nau mai",
+        "Please": "Tēnā koa",
+        "Yes": "Āe",
+        "No": "Kāo",
+        "Excuse me": "Aroha mai",
+        # Te Reo Terms
+        "Family": "Whānau",
+        "Friend": "Hoa",
+        "House": "Whare",
+        "Food": "Kai",
+        "Water": "Wai"
     }
     return translations.get(word, " ")
 
