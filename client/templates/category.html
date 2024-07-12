@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category }}</title>
+</head>
+<body>
+    <button onclick="window.location.href='/pokedex'">Back</button>
+    <h1>{{ category }}</h1>
+    <ul>
+        {% for word, translation in words.items() %}
+            <li>{{ word }} - {{ translation }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
