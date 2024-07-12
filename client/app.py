@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 import base64
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 
 words = {
     "greetings": {
@@ -64,12 +65,14 @@ def index():
 
 @app.route('/pokedex')
 def pokedex():
-    return render_template('pokedex.html')
+    seen_words = session.get('seen_words', [])
+    return render_template('pokedex.html', words=words, seen_words=seen_words)
 
 @app.route('/category/<category>')
 def category(category):
     category_words = words.get(category, {})
-    return render_template('category.html', category=category.capitalize(), words=category_words)
+    seen_words = session.get('seen_words', [])
+    return render_template('category.html', category=category.capitalize(), words=category_words, seen_words=seen_words)
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -83,10 +86,16 @@ def upload():
     word = interpret_image('captured_image.png')
     translated_word = translate_to_maori(word)
     
+    # Update seen words in session
+    seen_words = session.get('seen_words', [])
+    if word not in seen_words:
+        seen_words.append(word)
+    session['seen_words'] = seen_words
+    
     return jsonify({'word': word, 'translated_word': translated_word}), 200
 
 def interpret_image(image_path):
-    return "Hello"
+    return "Hello"  # This should be replaced with your actual model logic
 
 def translate_to_maori(word):
     translations = {

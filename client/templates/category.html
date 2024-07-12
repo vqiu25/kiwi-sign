@@ -2,13 +2,18 @@
 <html>
 <head>
     <title>{{ category }}</title>
+    <style>
+        .seen {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     <button onclick="window.location.href='/pokedex'">Back</button>
     <h1>{{ category }}</h1>
     <ul>
         {% for word, translation in words.items() %}
-            <li>{{ word }} - {{ translation }}</li>
+            <li class="{% if word in seen_words %}seen{% endif %}">{{ word }} - {{ translation }}</li>
         {% endfor %}
     </ul>
 </body>
