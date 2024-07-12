@@ -2,19 +2,33 @@
 <html>
 <head>
     <title>Live Camera Feed</title>
+    <style>
+        #camera-page {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Live Camera Feed</h1>
-    <button id="start-camera">Start Camera</button>
-    <video id="video" width="640" height="480" autoplay style="display: none;"></video>
-    <div id="result"></div>
-    <div id="translated-result"></div>
+    <div id="home-page">
+        <h1>Welcome to the Live Camera Feed</h1>
+        <button id="start-camera">Start Camera</button>
+    </div>
+    <div id="camera-page">
+        <button id="back-button">Back</button>
+        <h1>Live Camera Feed</h1>
+        <video id="video" width="640" height="480" autoplay></video>
+        <div id="result"></div>
+        <div id="translated-result"></div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
     <script>
         const startCameraButton = document.getElementById('start-camera');
+        const backButton = document.getElementById('back-button');
+        const homePage = document.getElementById('home-page');
+        const cameraPage = document.getElementById('camera-page');
         const video = document.getElementById('video');
         const resultDiv = document.getElementById('result');
         const translatedResultDiv = document.getElementById('translated-result');
@@ -27,13 +41,15 @@
         hands.setOptions({
             maxNumHands: 2,
             modelComplexity: 1,
-            minDetectionConfidence: 0.7,  // Increased detection confidence
-            minTrackingConfidence: 0.7   // Increased tracking confidence
+            minDetectionConfidence: 0.7,
+            minTrackingConfidence: 0.7
         });
 
         hands.onResults(onResults);
 
         startCameraButton.addEventListener('click', () => {
+            homePage.style.display = 'none';
+            cameraPage.style.display = 'block';
             video.style.display = 'block';
             camera = new Camera(video, {
                 onFrame: async () => {
@@ -46,8 +62,14 @@
             camera.start();
         });
 
+        backButton.addEventListener('click', () => {
+            camera.stop();
+            homePage.style.display = 'block';
+            cameraPage.style.display = 'none';
+            video.style.display = 'none';
+        });
+
         function onResults(results) {
-            // Check if any hands are detected
             if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
                 captureImage();
             }
@@ -70,7 +92,6 @@
             })
             .then(response => response.json())
             .then(data => {
-                // Display the word and its translation received from the backend
                 resultDiv.innerText = `Detected word: ${data.word}`;
                 translatedResultDiv.innerText = `Translated to Maori: ${data.translated_word}`;
             })
