@@ -5,7 +5,8 @@
 </head>
 <body>
     <h1>Live Camera Feed</h1>
-    <video id="video" width="640" height="480" autoplay></video>
+    <button id="start-camera">Start Camera</button>
+    <video id="video" width="640" height="480" autoplay style="display: none;"></video>
     <div id="result"></div>
     <div id="translated-result"></div>
 
@@ -13,9 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
     <script>
+        const startCameraButton = document.getElementById('start-camera');
         const video = document.getElementById('video');
         const resultDiv = document.getElementById('result');
         const translatedResultDiv = document.getElementById('translated-result');
+        let camera;
+
         const hands = new Hands({locateFile: (file) => {
             return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
         }});
@@ -29,15 +33,18 @@
 
         hands.onResults(onResults);
 
-        const camera = new Camera(video, {
-            onFrame: async () => {
-                await hands.send({image: video});
-            },
-            width: 640,
-            height: 480
-        });
+        startCameraButton.addEventListener('click', () => {
+            video.style.display = 'block';
+            camera = new Camera(video, {
+                onFrame: async () => {
+                    await hands.send({image: video});
+                },
+                width: 640,
+                height: 480
+            });
 
-        camera.start();
+            camera.start();
+        });
 
         function onResults(results) {
             // Check if any hands are detected
@@ -64,8 +71,8 @@
             .then(response => response.json())
             .then(data => {
                 // Display the word and its translation received from the backend
-                resultDiv.innerText = `${data.word}`;
-                translatedResultDiv.innerText = `${data.translated_word}`;
+                resultDiv.innerText = `Detected word: ${data.word}`;
+                translatedResultDiv.innerText = `Translated to Maori: ${data.translated_word}`;
             })
             .catch(error => {
                 console.error('Error:', error);

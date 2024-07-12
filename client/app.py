@@ -32,6 +32,7 @@ def translate_to_maori(word):
     # Dummy function to simulate translation
     # Replace this with your actual translation API call
     translations = {
+        # update with all translations from the backend. 
         "Hello": "Kia ora",
         "Goodbye": "Haere rā",
         "Thank you": "Ngā mihi"
