@@ -8,6 +8,8 @@ import warnings
 from flask_socketio import SocketIO, emit
 import base64
 
+import database
+
 app = Flask(__name__, static_url_path='/static')
 socketio = SocketIO(app)
 
@@ -15,6 +17,19 @@ app.secret_key = 'your_secret_key'
 
 # Suppress specific deprecation warnings from protobuf
 warnings.filterwarnings("ignore", category=UserWarning, message=".*GetPrototype.*")
+
+words = {
+    "alphabet": ["A", "B", "C"],
+    "numbers": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "terms": ["Hello", "Goodbye", "Please", "Thank you", "Sorry", "Yes", "No"],
+    "nature": ["Mountain", "Water", "Te reo"]
+}
+
+connection, cursor = database.connectDB()
+database.setUpWordsTable(connection, cursor, words)
+database.printTable(cursor, "words")
+database.closeDB(connection)
 
 # Load the model
 model_dict = pickle.load(open('model.pickle', 'rb'))
@@ -35,10 +50,9 @@ last_prediction = None
 gesture_start_time = None
 gesture_held = False
 
-cap = cv2.VideoCapture(0)
-
 def generate_frames():
     global prediction, last_prediction, gesture_start_time, gesture_held, currentTime
+    cap = cv2.VideoCapture(0)
     try:
         while True:
             currentTime += 1
@@ -90,61 +104,6 @@ def generate_frames():
     finally:
         cap.release()
 
-words = {
-    "greetings": {
-        "Hello": "Kia ora",
-        "Goodbye": "Haere rā",
-        "Thank you": "Ngā mihi"
-    },
-    "numbers": {
-        "Zero": "Kore",
-        "One": "Tahi",
-        "Two": "Rua",
-        "Three": "Toru",
-        "Four": "Whā",
-        "Five": "Rima",
-        "Six": "Ono",
-        "Seven": "Whitu",
-        "Eight": "Waru",
-        "Nine": "Iwa"
-    },
-    "days": {
-        "Monday": "Rāhina",
-        "Tuesday": "Rātū",
-        "Wednesday": "Rāapa",
-        "Thursday": "Rāpare",
-        "Friday": "Rāmere",
-        "Saturday": "Rāhoroi",
-        "Sunday": "Rātapu"
-    },
-    "months": {
-        "January": "Kohitātea",
-        "February": "Hui-tanguru",
-        "March": "Poutū-te-rangi",
-        "April": "Paenga-whāwhā",
-        "May": "Haratua",
-        "June": "Pipiri",
-        "July": "Hōngongoi",
-        "August": "Here-turi-kōkā",
-        "September": "Mahuru",
-        "October": "Whiringa-ā-nuku",
-        "November": "Whiringa-ā-rangi",
-        "December": "Hakihea"
-    },
-    "terms": {
-        "Welcome": "Nau mai",
-        "Please": "Tēnā koa",
-        "Yes": "Āe",
-        "No": "Kāo",
-        "Excuse me": "Aroha mai",
-        "Family": "Whānau",
-        "Friend": "Hoa",
-        "House": "Whare",
-        "Food": "Kai",
-        "Water": "Wai"
-    }
-}
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -171,11 +130,11 @@ def pokedex():
     seen_words = session.get('seen_words', [])
     return render_template('pokedex.html', words=words, seen_words=seen_words)
 
-@app.route('/category/<category>')
-def category(category):
-    category_words = words.get(category, {})
-    seen_words = session.get('seen_words', [])
-    return render_template('category.html', category=category.capitalize(), words=category_words, seen_words=seen_words)
+# @app.route('/category/<category>')
+# def category(category):
+#     category_words = words.get(category, {})
+#     seen_words = session.get('seen_words', [])
+#     return render_template('category.html', category=category.capitalize(), words=category_words, seen_words=seen_words)
 
 if __name__ == '__main__':
     app.run(debug=True)
