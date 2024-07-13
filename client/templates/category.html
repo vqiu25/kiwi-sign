@@ -4,36 +4,13 @@
 <head>
     <title>{{ category }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
-
 </head>
 
 <body>
-    <!-- <div class="container">
-        <button onclick="window.location.href='/pokedex'">Back</button>
-        <h1>{{ category }}</h1>
-        <ul class="cards">
-            {% for word, translation in words.items() %}
-                    <div class="card-content-discovered">
-                        <a href="#" class="{% if word in seen_words %}seen{% endif %}" id="word">{{ word }} - {{ translation }}</a>
-                    </div>
-            {% endfor %}
-        </ul>      
-        <ul class="cards">
-            {% for word, translation in words.items() %}
-                <li class="card {% if word not in seen_words %}blur{% endif %}">
-                    <div class="card-content">
-                        <a href="#" class="{% if word in seen_words %}seen{% endif %}">{{ word }} - {{ translation }}</a>
-                    </div>
-                    {% if word not in seen_words %}
-                    <img src="{{ url_for('static', filename='gallery/lock.png') }}" alt="logo" class="blur-overlay">
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    </div> -->
     <div class="container">
-        <button onclick="window.location.href='/pokedex'"class="button">Back</button>
+        <button onclick="window.location.href='/pokedex'" class="button">Back</button>
         <h1>{{ category }}</h1>
+        <p class="unlock-message">Keep signing to unlock all words in {{ category }}!</p>
 
         <ul class="cards">
             {% for word, translation in words.items() %}
@@ -43,15 +20,16 @@
             </div>
             {% endif %}
             {% endfor %}
-        </ul>   
+        </ul>
 
         <ul class="cards">
             {% for word, translation in words.items() %}
             {% if word not in seen_words %}
-            <li class="card">
-                <div class="card-content">
-                    <a href="#" class="seen">{{ word }} - {{ translation }}</a>
+            <li class="card blur">
+                <div class="blur-content">
+                    <a href="#" class="blurred-text">{{ word }} - {{ translation }}</a>
                 </div>
+                <span class="lock-emoji">🔒</span>
             </li>
             {% endif %}
             {% endfor %}
