@@ -22,16 +22,17 @@ words = {
         "Thank you": "Ngā mihi"
     },
     "numbers": {
-        "Zero": "Kore",
-        "One": "Tahi",
-        "Two": "Rua",
-        "Three": "Toru",
-        "Four": "Whā",
-        "Five": "Rima",
-        "Six": "Ono",
-        "Seven": "Whitu",
-        "Eight": "Waru",
-        "Nine": "Iwa"
+        "0": "Kore",
+        "1": "Tahi",
+        "2": "Rua",
+        "3": "Toru",
+        "4": "Whā",
+        "5": "Rima",
+        "6": "Ono",
+        "7": "Whitu",
+        "8": "Waru",
+        "9": "Iwa",
+        "10": "Tekau"
     },
     "days": {
         "Monday": "Rāhina",
@@ -96,10 +97,21 @@ def save_gesture(gesture):
             file.seek(0)
             existing_gestures = file.read().splitlines()
             if gesture not in existing_gestures:
-                file.write(gesture + '\n')
+                file.write(gesture.capitalize() + '\n')
     except FileNotFoundError:
         with open(filename, 'w') as file:
-            file.write(gesture + '\n')
+            file.write(gesture.capitalize() + '\n')
+
+# Function to read seen words from database.txt
+def read_seen_words():
+    filename = 'database.txt'
+    seen_words = []
+    try:
+        with open(filename, 'r') as file:
+            seen_words = file.read().splitlines()
+    except FileNotFoundError:
+        pass  # Handle if the file does not exist or is empty
+    return seen_words
 
 def generate_frames():
     global prediction, last_prediction, gesture_start_time, gesture_held, currentTime
@@ -179,13 +191,18 @@ def get_gesture():
 
 @app.route('/pokedex')
 def pokedex():
-    seen_words = session.get('seen_words', [])
+    seen_words = read_seen_words()
+    print('triggering pokedex')
+    print(seen_words)
     return render_template('pokedex.html', words=words, seen_words=seen_words)
 
 @app.route('/category/<category>')
 def category(category):
     category_words = words.get(category, {})
-    seen_words = session.get('seen_words', [])
+    seen_words = read_seen_words()
+    print('triggering category')
+    print(category_words)
+    print(seen_words)
     return render_template('category.html', category=category.capitalize(), words=category_words, seen_words=seen_words)
 
 if __name__ == '__main__':
