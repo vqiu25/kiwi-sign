@@ -200,10 +200,12 @@ def pokedex():
 def category(category):
     category_words = words.get(category, {})
     seen_words = read_seen_words()
-    print('triggering category')
-    print(category_words)
-    print(seen_words)
-    return render_template('category.html', category=category.capitalize(), words=category_words, seen_words=seen_words)
+    
+    total_words = len(category_words)
+    unlocked_words = len([word for word in category_words if word in seen_words])
+    progress_percentage = (unlocked_words / total_words) * 100 if total_words > 0 else 0
+    
+    return render_template('category.html', category=category.capitalize(), words=category_words, seen_words=seen_words, progress_percentage=progress_percentage)
 
 if __name__ == '__main__':
     app.run(debug=True)

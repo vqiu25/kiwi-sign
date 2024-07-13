@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>{{ category }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
 </head>
-
 <body>
     <div class="container">
         <button onclick="window.location.href='/pokedex'" class="button">Back</button>
-        <h1>{{ category }}</h1>
+        <div class="progress-container">
+            <div class="progress-ring">
+                <h1>{{ category }}</h1>
+                <svg width="160" height="160">
+                    <circle class="progress-ring__background" stroke="#e0e0e0" stroke-width="4" fill="transparent" r="75" cx="80" cy="80"/>
+                    <circle class="progress-ring__circle" stroke="green" stroke-width="4" fill="transparent" r="75" cx="80" cy="80"/>
+                </svg>
+            </div>
+            <div class="progress-percentage">
+                {{ progress_percentage | round(1) }}%
+            </div>
+        </div>
         <p class="unlock-message">Keep signing to unlock all words in {{ category }}!</p>
 
         <ul class="cards">
@@ -35,6 +44,20 @@
             {% endfor %}
         </ul>
     </div>
-</body>
 
+    <script>
+        const circle = document.querySelector('.progress-ring__circle');
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = `${circumference}`;
+
+        function setProgress(percent) {
+            const offset = circumference - (percent / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+        }
+
+        setProgress({{ progress_percentage }});
+    </script>
+</body>
 </html>
