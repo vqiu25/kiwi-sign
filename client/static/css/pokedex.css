@@ -16,6 +16,11 @@ h1 {
     color: #333;
 }
 
+#word {
+    text-decoration: none;
+    color: white;
+}
+
 .button {
     margin: 20px;
     padding: 10px 20px;

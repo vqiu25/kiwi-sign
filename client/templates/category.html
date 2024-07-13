@@ -2,19 +2,32 @@
 <html>
 <head>
     <title>{{ category }}</title>
-    <style>
-        .seen {
-            color: green;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
+
 </head>
 <body>
-    <button onclick="window.location.href='/pokedex'">Back</button>
-    <h1>{{ category }}</h1>
-    <ul>
-        {% for word, translation in words.items() %}
-            <li class="{% if word in seen_words %}seen{% endif %}">{{ word }} - {{ translation }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <button onclick="window.location.href='/pokedex'">Back</button>
+        <h1>{{ category }}</h1>
+        <ul class="cards">
+            {% for word, translation in words.items() %}
+                    <div class="card-content-discovered">
+                        <a href="#" class="{% if word in seen_words %}seen{% endif %}" id="word">{{ word }} - {{ translation }}</a>
+                    </div>
+            {% endfor %}
+        </ul>      
+        <ul class="cards">
+            {% for word, translation in words.items() %}
+                <li class="card {% if word not in seen_words %}blur{% endif %}">
+                    <div class="card-content">
+                        <a href="#" class="{% if word in seen_words %}seen{% endif %}">{{ word }} - {{ translation }}</a>
+                    </div>
+                    {% if word not in seen_words %}
+                    <img src="{{ url_for('static', filename='gallery/lock.png') }}" alt="logo" class="blur-overlay">
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
