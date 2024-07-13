@@ -119,14 +119,17 @@
     const messageContainer = document.getElementById('message-container');
     const messageContent = document.getElementById('message-content');
 
-    messageContent.textContent = 'Congratulations! You have unlocked a new prize.';
-    messageContainer.classList.add('slide-in');
+    if (messageContainer && messageContent) {
+        messageContent.textContent = 'Congratulations! You have unlocked a new word. Check your signdex';
+        messageContainer.classList.add('slide-in');
+    }
 
-    // Optional: Remove the slide-in class after some time
     setTimeout(() => {
-        messageContainer.classList.remove('slide-in');
-    }, 3000); // Adjust time as needed (3 seconds in this case)
+            // Optionally, move the message container out of view
+            messageContainer.style.top = '-100px'; // Example: move out of frame
+        }, 4000); 
 }
+
 
 
         </script>

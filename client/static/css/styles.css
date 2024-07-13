@@ -17,29 +17,42 @@ body {
     font-weight: 700;
     color: #3A6552;
 }
-/* CSS for message container */
+
 #message-container {
     position: fixed;
-    top: 50%; /* Adjust top position as needed */
-    right: 50px; /* Start off-screen on the right */
-    transform: translate(0, -50%);
-    background-color: #fff;
-    padding: 20px;
+    top: 20px; 
+    left: 50%;
+    transform: translate(-50%, 0); 
+    padding: 15px 20px;
     border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: right 0.5s ease; /* Smooth transition effect */
-    z-index: 1000; /* Ensure it's above other content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 12px; 
+    transition: top 0.5s ease; 
+    z-index: 1000; 
+    font-family: "San Francisco", "Helvetica Neue", Arial, sans-serif;
 }
+
+#message-content {
+    font-size: 14px;
+    color: #333;
+}
+
+.slide-in {
+    top: 20px;
+    /* Define your animation properties here */
+    animation: slideInAnimation 0.5s ease;
+}
+
+@keyframes slideInAnimation {
+    0% { opacity: 0; transform: translateY(-50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
 
 /* CSS for message content */
 #message-content {
     font-size: 16px;
     color: #333;
-}
-
-/* Animation for slide-in effect */
-.slide-in {
-    right: 20px; /* Adjust position where it should slide in */
 }
 
 
