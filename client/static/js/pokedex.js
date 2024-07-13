@@ -6,20 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.container');
     const categoryList = document.querySelector('.category');
     const items = document.querySelectorAll('.card');
-    const itemWidth = items[0].clientWidth + 20; // width + margin
+    const itemWidth = items[0].offsetWidth + 20; // width + margin (includes padding and border if any)
 
     let scrollPos = 0;
+    const maxScroll = categoryList.scrollWidth - container.offsetWidth;
 
     const scrollContainer = (direction) => {
         if (direction === 'right') {
             scrollPos += itemWidth;
-            if (scrollPos >= categoryList.scrollWidth) {
-                scrollPos = 0;
+            if (scrollPos > maxScroll) {
+                scrollPos = maxScroll; // Prevents scrolling beyond the content
             }
         } else if (direction === 'left') {
             scrollPos -= itemWidth;
             if (scrollPos < 0) {
-                scrollPos = categoryList.scrollWidth - container.clientWidth;
+                scrollPos = 0; // Prevents scrolling before the content
             }
         }
         categoryList.style.transform = `translateX(-${scrollPos}px)`;
