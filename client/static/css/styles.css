@@ -12,6 +12,10 @@ body {
     background-color: #EDEFD5;
 }
 
+p {
+    color: #3A6552;
+}
+
 #output, #hold, #translation {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
@@ -57,7 +61,7 @@ h1 {
     color: #3A6552;
     font-family: "Playfair Display", serif;
     text-align: center;
-    font-size: 25px;
+    font-size: 35px;
 }
 
 #video {
