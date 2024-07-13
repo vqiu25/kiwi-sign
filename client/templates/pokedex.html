@@ -4,16 +4,27 @@
     <title>Pokedex</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pokedex.css') }}"></head>
 <body>
-    <button onclick="window.location.href='/'">Back</button>
     <h1>Pokedex</h1>
     <div class="container">
         <ul class="category">
+            <div id="card">
             <li><a href="/category/greetings" class="{% if 'greetings' in seen_words %}seen{% endif %}">Greetings</a></li>
+            </div>
+            <div id="card">
             <li><a href="/category/numbers" class="{% if 'numbers' in seen_words %}seen{% endif %}">Numbers</a></li>
+        </div>
+        <div id="card">
             <li><a href="/category/days" class="{% if 'days' in seen_words %}seen{% endif %}">Days of the Week</a></li>
+        </div>
+        <div id="card">
             <li><a href="/category/months" class="{% if 'months' in seen_words %}seen{% endif %}">Months</a></li>
+        </div>
+        <div id="card">
             <li><a href="/category/terms" class="{% if 'terms' in seen_words %}seen{% endif %}">Common Terms</a></li>
+        </div>
         </ul>
     </div>
+    <button onclick="window.location.href='/'" class="button">Back</button>
+
 </body>
 </html>
