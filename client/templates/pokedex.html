@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pokedex</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pokedex.css') }}"></head>
+    <title>Sign Language Dex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pokedex.css') }}">
+    <script src="{{ url_for('static', filename='js/pokedex.js') }}" defer></script>
+</head>
 <body>
-    <button onclick="window.location.href='/'">Back</button>
-    <h1>Pokedex</h1>
-    <div class="container">
-        <ul class="category">
-            <li><a href="/category/greetings" class="{% if 'greetings' in seen_words %}seen{% endif %}">Greetings</a></li>
-            <li><a href="/category/numbers" class="{% if 'numbers' in seen_words %}seen{% endif %}">Numbers</a></li>
-            <li><a href="/category/days" class="{% if 'days' in seen_words %}seen{% endif %}">Days of the Week</a></li>
-            <li><a href="/category/months" class="{% if 'months' in seen_words %}seen{% endif %}">Months</a></li>
-            <li><a href="/category/terms" class="{% if 'terms' in seen_words %}seen{% endif %}">Common Terms</a></li>
-        </ul>
+    <h1>Sign Language Dex</h1>
+    <div class="scroll-container">
+        <button class="scroll-button left" onclick="scrollContainer('left')">❮</button>
+        <div class="container">
+            <ul class="category">
+                <div class="card" onclick="navigateTo('/category/greetings')">
+                    <span class="icon">👋</span>
+                    <h2>Greetings</h2>
+                    <p>Learn basic greeting signs.</p>
+                </div>
+                <div class="card" onclick="navigateTo('/category/numbers')">
+                    <span class="icon">🔢</span>
+                    <h2>Numbers</h2>
+                    <p>Master sign language numbers.</p>
+                </div>
+                <div class="card" onclick="navigateTo('/category/days')">
+                    <span class="icon">🔅</span>
+                    <h2>Days</h2>
+                    <p>Practice days of the week signs.</p>
+                </div>
+                <div class="card" onclick="navigateTo('/category/months')">
+                    <span class="icon">📅</span>
+                    <h2>Months</h2>
+                    <p>Learn sign language months.</p>
+                </div>
+                <div class="card" onclick="navigateTo('/category/terms')">
+                    <span class="icon">📘</span>
+                    <h2>Common Terms</h2>
+                    <p>Understand common sign language terms.</p>
+                </div>
+            </ul>
+        </div>
+        <button class="scroll-button right" onclick="scrollContainer('right')">❯</button>
     </div>
+    <button onclick="window.location.href='/'" class="button">Back</button>
 </body>
 </html>

@@ -1,2 +1,7 @@
 .DS_Store
 *.jpg
+collect_img.py
+create_dataset.py
+drawing.py
+inference_classifier.py
+train_classifier.py
