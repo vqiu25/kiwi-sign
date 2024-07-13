@@ -7,14 +7,19 @@
         #camera-page, #pokedex-page {
             display: none;
         }
+        #new-word-unlocked {
+            color: red;
+        }
     </style>
 </head>
 <body>
     <img src="{{ url_for('static', filename='gallery/NZSL.png') }}" alt="logo">
     <div id="home-page">
         <h1>Welcome to the Live Camera Feed</h1>
+        <div class="button-container">
         <button id="start-camera" class="button">Start Camera</button><br>
         <button onclick="window.location.href='/pokedex'" class="button">Pokedex</button>
+        </div>
     </div>
     <div id="camera-page">
         <button id="back-button" class="button">Back</button>
@@ -22,6 +27,7 @@
         <video id="video" width="640" height="480" autoplay></video>
         <div id="result"></div>
         <div id="translated-result"></div>
+        <div id="new-word-unlocked"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
@@ -35,7 +41,9 @@
         const video = document.getElementById('video');
         const resultDiv = document.getElementById('result');
         const translatedResultDiv = document.getElementById('translated-result');
+        const newWordUnlockedDiv = document.getElementById('new-word-unlocked');
         let camera;
+        let currentWord = '';
 
         const hands = new Hands({locateFile: (file) => {
             return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
@@ -95,8 +103,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                resultDiv.innerText = `Detected word: ${data.word}`;
-                translatedResultDiv.innerText = `Translated to Maori: ${data.translated_word}`;
+                if (currentWord !== data.word) {
+                    currentWord = data.word;
+                    resultDiv.innerText = `Detected word: ${data.word}`;
+                    translatedResultDiv.innerText = `Translated to Maori: ${data.translated_word}`;
+                    if (data.new_word_unlocked) {
+                        newWordUnlockedDiv.innerText = "New Word Unlocked";
+                    } else {
+                        newWordUnlockedDiv.innerText = "";
+                    }
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
