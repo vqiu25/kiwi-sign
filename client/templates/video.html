@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hand Gesture Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body>
-    <div id="video">
-        <img src="{{ url_for('video_feed') }}" alt="Webcam Feed">
+    <div id="loading">Loading...</div>
+    <div id="video" style="display:none;">
+        <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" onload="hideLoadingSymbol()">
     </div>
     <div id="output">Waiting for gesture...</div>
 
@@ -24,6 +26,11 @@
                 .catch(error => console.error('Error:', error));
         }
         setInterval(updateGesture, 100);
+
+        function hideLoadingSymbol() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('video').style.display = 'block';
+        }
     </script>
 </body>
 
