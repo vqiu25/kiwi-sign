@@ -35,10 +35,9 @@ last_prediction = None
 gesture_start_time = None
 gesture_held = False
 
-cap = cv2.VideoCapture(0)
-
 def generate_frames():
     global prediction, last_prediction, gesture_start_time, gesture_held, currentTime
+    cap = cv2.VideoCapture(0)
     try:
         while True:
             currentTime += 1
