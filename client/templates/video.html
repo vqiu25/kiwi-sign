@@ -13,13 +13,12 @@
     <div id="video" style="display:none;">
         <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" class="video-feed" onload="hideLoadingSymbol()">
         <div class="button-container">
-            <button id="back-button" class="button">Back</button>
             <div id="output">Waiting for gesture...</div>
+            <div id="translation"></div>
+            <button onclick="window.location.href='/'" class="button">Back</button>
         </div>
     </div>
-    <div id="output">Waiting for gesture...</div>
-    <div id="translation"></div>
-    <button onclick="window.location.href='/'" class="button">Back</button>
+
 
     <script>
         // Script for predictions
