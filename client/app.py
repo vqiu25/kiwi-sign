@@ -88,11 +88,12 @@ def upload():
     
     # Update seen words in session
     seen_words = session.get('seen_words', [])
-    if word not in seen_words:
+    new_word_unlocked = word not in seen_words
+    if new_word_unlocked:
         seen_words.append(word)
     session['seen_words'] = seen_words
     
-    return jsonify({'word': word, 'translated_word': translated_word}), 200
+    return jsonify({'word': word, 'translated_word': translated_word, 'new_word_unlocked': new_word_unlocked}), 200
 
 def interpret_image(image_path):
     return "Hello"  # This should be replaced with your actual model logic
@@ -135,19 +136,9 @@ def translate_to_maori(word):
         "September": "Mahuru",
         "October": "Whiringa-ā-nuku",
         "November": "Whiringa-ā-rangi",
-        "December": "Hakihea",
-        "Welcome": "Nau mai",
-        "Please": "Tēnā koa",
-        "Yes": "Āe",
-        "No": "Kāo",
-        "Excuse me": "Aroha mai",
-        "Family": "Whānau",
-        "Friend": "Hoa",
-        "House": "Whare",
-        "Food": "Kai",
-        "Water": "Wai"
+        "December": "Hakihea"
     }
-    return translations.get(word, " ")
+    return translations.get(word, word)
 
 if __name__ == '__main__':
     app.run(debug=True)
