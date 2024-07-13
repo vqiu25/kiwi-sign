@@ -13,16 +13,22 @@
     <div id="video" style="display:none;">
         <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" onload="hideLoadingSymbol()">
     </div>
-    <div id="output"></div>
+    <div id="output">water</div>
+    <div id="translation"></div>
     <button onclick="window.location.href='/'" class="button">Back</button>
+
+
     <script>
+        // Script for predictions
         const outputDiv = document.getElementById('output');
+        const translateDiv = document.getElementById('translation');
         function updateGesture() {
             fetch('/get_gesture')
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data.gesture);
-                    outputDiv.innerHTML = 'Predicted Gesture: ' + data.gesture;
+                    let gest = processString(data.gesture);
+                    outputDiv.innerHTML = 'Predicted Gesture: ' + gest;
+                    translateDiv.innerHTML = translate(gest);
                 })
                 .catch(error => console.error('Error:', error));
         }
@@ -32,7 +38,60 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('video').style.display = 'block';
         }
-    </script>
+
+        function processString(str) {
+            str = str.replace("'", "").replace("'", "").replace("[", "").replace("]", "");
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function translate(word) {
+            const translations = new Map([
+                ["Hello", "Kia ora"],
+                ["Goodbye", "Haere rā"],
+                ["Thank you", "Ngā mihi"],
+                ["A", "Ā"],
+                ["E", "Ē"],
+                ["I", "Ī"],
+                ["O", "Ō"],
+                ["U", "Ū"],
+                ["0", "Kore"],
+                ["1", "Tahi"],
+                ["2", "Rua"],
+                ["3", "Toru"],
+                ["4", "Whā"],
+                ["5", "Rima"],
+                ["6", "Ono"],
+                ["7", "Whitu"],
+                ["8", "Waru"],
+                ["9", "Iwa"],
+                ["10", "tekau"],
+                ["Monday", "Rāhina"],
+                ["Tuesday", "Rātū"],
+                ["Wednesday", "Rāapa"],
+                ["Thursday", "Rāpare"],
+                ["Friday", "Rāmere"],
+                ["Saturday", "Rāhoroi"],
+                ["Sunday", "Rātapu"],
+                ["January", "Kohitātea"],
+                ["February", "Hui-tanguru"],
+                ["March", "Poutū-te-rangi"],
+                ["April", "Paenga-whāwhā"],
+                ["May", "Haratua"],
+                ["June", "Pipiri"],
+                ["July", "Hōngongoi"],
+                ["August", "Here-turi-kōkā"],
+                ["September", "Mahuru"],
+                ["October", "Whiringa-ā-nuku"],
+                ["November", "Whiringa-ā-rangi"],
+                ["December", "Hakihea"],
+                ["Mountain", "Maunga"],
+                ["Water", "Wai"]
+            ])
+
+            return translations.has(word)?translations.get(word):"";
+        }
+        </script>
+        
 </body>
 
 </html>
