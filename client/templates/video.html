@@ -40,11 +40,11 @@
                 .then(response => response.json())
                 .then(data => {
                     const holdDiv = document.getElementById('hold');
-                    if (data.gesture == true) {
+                    if (data.gesture == true) { 
                         // TODO: Make this update the discovered words
-                        holdDiv.innerHTML = 'gesture held for 3 seconds';
+                        holdDiv.innerHTML = 'You unlocked a new gesture!';
                     } else {
-                        holdDiv.innerHTML = 'nothing';
+                        holdDiv.innerHTML = 'Hold a gesture for 3 seconds';
                     }
                 })
                 .catch(error => console.error('Error:', error));

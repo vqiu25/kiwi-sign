@@ -67,7 +67,8 @@ words = {
         "Friend": "Hoa",
         "House": "Whare",
         "Food": "Kai",
-        "Water": "Wai"
+        "Water": "Wai",
+        "Marae": "Marae"
     }
 }
 
@@ -96,7 +97,7 @@ def save_gesture(gesture):
         with open(filename, 'a+') as file:
             file.seek(0)
             existing_gestures = file.read().splitlines()
-            if gesture not in existing_gestures:
+            if gesture.capitalize() not in existing_gestures:
                 file.write(gesture.capitalize() + '\n')
     except FileNotFoundError:
         with open(filename, 'w') as file:
