@@ -35,7 +35,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
     <script>
-        const startCameraButton = document.getElementById('start-camera');
+        // const startCameraButton = document.getElementById('start-camera');
         const backButton = document.getElementById('back-button');
         const homePage = document.getElementById('home-page');
         const cameraPage = document.getElementById('camera-page');
@@ -47,20 +47,20 @@
         let currentWord = '';
 
 
-        startCameraButton.addEventListener('click', () => {
-            homePage.style.display = 'none';
-            cameraPage.style.display = 'block';
-            video.style.display = 'block';
-            camera = new Camera(video, {
-                onFrame: async () => {
-                    await hands.send({image: video});
-                },
-                width: 640,
-                height: 480
-            });
+        // startCameraButton.addEventListener('click', () => {
+        //     homePage.style.display = 'none';
+        //     cameraPage.style.display = 'block';
+        //     video.style.display = 'block';
+        //     camera = new Camera(video, {
+        //         onFrame: async () => {
+        //             await hands.send({image: video});
+        //         },
+        //         width: 640,
+        //         height: 480
+        //     });
 
-            camera.start();
-        });
+        //     camera.start();
+        // });
 
         backButton.addEventListener('click', () => {
             camera.stop();
@@ -69,44 +69,44 @@
             video.style.display = 'none';
         });
 
-        function onResults(results) {
-            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-                captureImage();
-            }
-        }
+        // function onResults(results) {
+        //     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        //         captureImage();
+        //     }
+        // }
 
-        function captureImage() {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const dataUrl = canvas.toDataURL('image/png');
+        // function captureImage() {
+        //     const canvas = document.createElement('canvas');
+        //     canvas.width = video.videoWidth;
+        //     canvas.height = video.videoHeight;
+        //     const context = canvas.getContext('2d');
+        //     context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        //     const dataUrl = canvas.toDataURL('image/png');
 
-            fetch('/upload', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: `image=${encodeURIComponent(dataUrl)}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (currentWord !== data.word) {
-                    currentWord = data.word;
-                    resultDiv.innerText = `Detected word: ${data.word}`;
-                    translatedResultDiv.innerText = `Translated to Maori: ${data.translated_word}`;
-                    if (data.new_word_unlocked) {
-                        newWordUnlockedDiv.innerText = "New Word Unlocked";
-                    } else {
-                        newWordUnlockedDiv.innerText = "";
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+        //     fetch('/upload', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/x-www-form-urlencoded'
+        //         },
+        //         body: `image=${encodeURIComponent(dataUrl)}`
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (currentWord !== data.word) {
+        //             currentWord = data.word;
+        //             resultDiv.innerText = `Detected word: ${data.word}`;
+        //             translatedResultDiv.innerText = `Translated to Maori: ${data.translated_word}`;
+        //             if (data.new_word_unlocked) {
+        //                 newWordUnlockedDiv.innerText = "New Word Unlocked";
+        //             } else {
+        //                 newWordUnlockedDiv.innerText = "";
+        //             }
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Error:', error);
+        //     });
+        // }
     </script>
 </body>
 </html>
