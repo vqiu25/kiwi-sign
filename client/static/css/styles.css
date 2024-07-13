@@ -12,6 +12,11 @@ body {
     background-color: #EDEFD5;
 }
 
+#output, #hold, #translation {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    color: #3A6552;
+}
 /* CSS for message container */
 #message-container {
     position: fixed;
