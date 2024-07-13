@@ -15,6 +15,7 @@
         <div class="button-container">
             <button id="back-button" class="button">Back</button>
             <div id="output">Waiting for gesture...</div>
+            <div id="hold"></div>
         </div>
     </div>
 
@@ -35,6 +36,23 @@
                 .catch(error => console.error('Error:', error));
         }
         setInterval(updateGesture, 100);
+
+        function fetchGestureStatus() {
+            fetch('/gesture_status')
+                .then(response => response.json())
+                .then(data => {
+                    const holdDiv = document.getElementById('hold');
+                    if (data.gesture == true) {
+                        // TODO: Make this update the discovered words
+                        holdDiv.innerHTML = 'gesture held for 3 seconds';
+                    } else {
+                        holdDiv.innerHTML = 'nothing';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        setInterval(fetchGestureStatus, 100);
 
         function hideLoadingSymbol() {
             document.getElementById('loading').style.display = 'none';
