@@ -1,3 +1,4 @@
+import sqlite3
 from flask import Flask, render_template, request, jsonify, session, Response
 import cv2
 import mediapipe as mp
@@ -26,11 +27,20 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
 prediction = None
+
+currentTime = 0
+
+# Track gesture consistency
+last_prediction = None
+gesture_start_time = None
+gesture_held = False
+
 def generate_frames():
-    global prediction
+    global prediction, last_prediction, gesture_start_time, gesture_held, currentTime
     cap = cv2.VideoCapture(0)
     try:
         while True:
+            currentTime += 1
             ret, frame = cap.read()
             if not ret:
                 break
@@ -57,9 +67,20 @@ def generate_frames():
 
                 if len(data_aux) == 84:
                     prediction = model.predict([np.asarray(data_aux)])
-            else:
-                prediction = None
-                
+                    predicted_gesture = prediction[0]
+                    # print(f"Predicted Gesture: {prediction}")
+
+                    if predicted_gesture == last_prediction:
+                        if gesture_start_time is None:
+                            gesture_start_time = currentTime;
+                        elif currentTime - gesture_start_time >= 30:
+                            gesture_held = True
+                    else:
+                        last_prediction = predicted_gesture
+                        gesture_start_time = None
+                        gesture_held = False
+            
+
             _, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
@@ -130,6 +151,11 @@ def index():
 @app.route('/video')
 def video():
     return render_template('video.html')
+
+@app.route('/gesture_status')
+def gesture_status():
+    global gesture_held
+    return jsonify({'gesture': gesture_held})
 
 @app.route('/video_feed')
 def video_feed():
