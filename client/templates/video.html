@@ -10,7 +10,15 @@
 
 <body>
     <div id="loading"></div>
+    <div id="message-container">
+        <div id="message-content"></div>
+    </div>    
     <div id="video" style="display:none;">
+        <h1>Welcome to the our sign language interpter</h1>
+
+        <p>1. Explore different gestures by creating signs within the camera view</p>
+        <p>2. Our system will analyse the gestures and provide context for the meaning of this gesture</p>
+        <p>3. Once you explore a new word it will be added to your Signdex</p>
         <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" class="video-feed" onload="hideLoadingSymbol()">
         <div class="button-container">
             <div id="output">Waiting for gesture...</div>
@@ -40,9 +48,9 @@
                 .then(response => response.json())
                 .then(data => {
                     const holdDiv = document.getElementById('hold');
-                    if (data.gesture == true) { 
-                        // TODO: Make this update the discovered words
-                        holdDiv.innerHTML = 'You unlocked a new gesture!';
+                    if (data.gesture == true) {
+                        holdDiv.innerHTML = 'gesture held for 3 seconds';
+                        triggerConfetti();
                     } else {
                         holdDiv.innerHTML = 'Hold a gesture for 3 seconds';
                     }
@@ -108,7 +116,21 @@
 
             return translations.has(word) ? translations.get(word) : "";
         }
+
+        function triggerConfetti() {
+            const messageContainer = document.getElementById('message-container');
+            const messageContent = document.getElementById('message-content');
+
+            if (messageContainer && messageContent) {
+                messageContent.textContent = 'Congratulations! You have unlocked a new word. Check your signdex';
+                messageContainer.classList.add('slide-in');
+                messageContainer.style.top = '20px'; // Slide in the message container
+            }
+
+            setTimeout(() => {
+                messageContainer.style.top = '-100px'; // Slide out the message container
+            }, 4000); 
+        }
     </script>
 </body>
-
 </html>
