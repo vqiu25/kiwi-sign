@@ -10,6 +10,9 @@
 
 <body>
     <div id="loading"></div>
+    <div id="message-container">
+        <div id="message-content"></div>
+    </div>    
     <div id="video" style="display:none;">
         <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" class="video-feed" onload="hideLoadingSymbol()">
         <div class="button-container">
@@ -19,6 +22,7 @@
             <button onclick="window.location.href='/'" class="button">Back</button>
         </div>
     </div>
+
 
     <script>
         const outputDiv = document.getElementById('output');
@@ -43,6 +47,8 @@
                     if (data.gesture == true) {
                         // TODO: Make this update the discovered words
                         holdDiv.innerHTML = 'gesture held for 3 seconds';
+                        triggerConfetti();
+
                     } else {
                         holdDiv.innerHTML = 'nothing';
                     }
@@ -104,11 +110,27 @@
                 ["December", "Hakihea"],
                 ["Mountain", "Maunga"],
                 ["Water", "Wai"]
-            ]);
+            ])
 
-            return translations.has(word) ? translations.get(word) : "";
+            return translations.has(word)?translations.get(word):"";
         }
-    </script>
+
+        function triggerConfetti() {
+    const messageContainer = document.getElementById('message-container');
+    const messageContent = document.getElementById('message-content');
+
+    messageContent.textContent = 'Congratulations! You have unlocked a new prize.';
+    messageContainer.classList.add('slide-in');
+
+    // Optional: Remove the slide-in class after some time
+    setTimeout(() => {
+        messageContainer.classList.remove('slide-in');
+    }, 3000); // Adjust time as needed (3 seconds in this case)
+}
+
+
+        </script>
+        
 </body>
 
 </html>
