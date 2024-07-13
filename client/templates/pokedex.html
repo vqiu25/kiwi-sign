@@ -2,29 +2,34 @@
 <html>
 <head>
     <title>Pokedex</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pokedex.css') }}"></head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pokedex.css') }}">
+    <script src="{{ url_for('static', filename='js/pokedex.js') }}" defer></script>
+</head>
 <body>
     <h1>Pokedex</h1>
-    <div class="container">
-        <ul class="category">
-            <div id="card">
-            <li><a href="/category/greetings" class="{% if 'greetings' in seen_words %}seen{% endif %}">Greetings</a></li>
-            </div>
-            <div id="card">
-            <li><a href="/category/numbers" class="{% if 'numbers' in seen_words %}seen{% endif %}">Numbers</a></li>
+    <div class="scroll-container">
+        <button class="scroll-button left" onclick="scrollContainer('left')">❮</button>
+        <div class="container">
+            <ul class="category">
+                <div class="card" onclick="navigateTo('/category/greetings')">
+                    <h2>Greetings</h2>
+                </div>
+                <div class="card" onclick="navigateTo('/category/numbers')">
+                    <h2>Numbers</h2>
+                </div>
+                <div class="card" onclick="navigateTo('/category/days')">
+                    <h2>Days of the Week</h2>
+                </div>
+                <div class="card" onclick="navigateTo('/category/months')">
+                    <h2>Months</h2>
+                </div>
+                <div class="card" onclick="navigateTo('/category/terms')">
+                    <h2>Common Terms</h2>
+                </div>
+            </ul>
         </div>
-        <div id="card">
-            <li><a href="/category/days" class="{% if 'days' in seen_words %}seen{% endif %}">Days of the Week</a></li>
-        </div>
-        <div id="card">
-            <li><a href="/category/months" class="{% if 'months' in seen_words %}seen{% endif %}">Months</a></li>
-        </div>
-        <div id="card">
-            <li><a href="/category/terms" class="{% if 'terms' in seen_words %}seen{% endif %}">Common Terms</a></li>
-        </div>
-        </ul>
+        <button class="scroll-button right" onclick="scrollContainer('right')">❯</button>
     </div>
     <button onclick="window.location.href='/'" class="button">Back</button>
-
 </body>
 </html>
