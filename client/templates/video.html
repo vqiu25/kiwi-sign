@@ -21,7 +21,6 @@
 
 
     <script>
-        // Script for predictions
         const outputDiv = document.getElementById('output');
         const translateDiv = document.getElementById('translation');
         function updateGesture() {
@@ -42,7 +41,7 @@
         }
 
         function processString(str) {
-            str = str.replace("'", "").replace("'", "").replace("[", "").replace("]", "");
+            str = str.replaceAll("'", "").replace("[", "").replace("]", "");
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
 
