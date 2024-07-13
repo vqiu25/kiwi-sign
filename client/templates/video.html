@@ -23,7 +23,6 @@
         </div>
     </div>
 
-
     <script>
         const outputDiv = document.getElementById('output');
         const translateDiv = document.getElementById('translation');
@@ -45,10 +44,8 @@
                 .then(data => {
                     const holdDiv = document.getElementById('hold');
                     if (data.gesture == true) {
-                        // TODO: Make this update the discovered words
                         holdDiv.innerHTML = 'gesture held for 3 seconds';
                         triggerConfetti();
-
                     } else {
                         holdDiv.innerHTML = 'nothing';
                     }
@@ -110,30 +107,25 @@
                 ["December", "Hakihea"],
                 ["Mountain", "Maunga"],
                 ["Water", "Wai"]
-            ])
+            ]);
 
-            return translations.has(word)?translations.get(word):"";
+            return translations.has(word) ? translations.get(word) : "";
         }
 
         function triggerConfetti() {
-    const messageContainer = document.getElementById('message-container');
-    const messageContent = document.getElementById('message-content');
+            const messageContainer = document.getElementById('message-container');
+            const messageContent = document.getElementById('message-content');
 
-    if (messageContainer && messageContent) {
-        messageContent.textContent = 'Congratulations! You have unlocked a new word. Check your signdex';
-        messageContainer.classList.add('slide-in');
-    }
+            if (messageContainer && messageContent) {
+                messageContent.textContent = 'Congratulations! You have unlocked a new word. Check your signdex';
+                messageContainer.classList.add('slide-in');
+                messageContainer.style.top = '20px'; // Slide in the message container
+            }
 
-    setTimeout(() => {
-            // Optionally, move the message container out of view
-            messageContainer.style.top = '-100px'; // Example: move out of frame
-        }, 4000); 
-}
-
-
-
-        </script>
-        
+            setTimeout(() => {
+                messageContainer.style.top = '-100px'; // Slide out the message container
+            }, 4000); 
+        }
+    </script>
 </body>
-
 </html>
