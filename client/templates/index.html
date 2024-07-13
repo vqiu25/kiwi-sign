@@ -10,13 +10,14 @@
     </style>
 </head>
 <body>
+    <img src="{{ url_for('static', filename='gallery/NZSL.png') }}" alt="logo">
     <div id="home-page">
         <h1>Welcome to the Live Camera Feed</h1>
-        <button id="start-camera">Start Camera</button>
-        <button onclick="window.location.href='/pokedex'">Pokedex</button>
+        <button id="start-camera" class="button">Start Camera</button><br>
+        <button onclick="window.location.href='/pokedex'" class="button">Pokedex</button>
     </div>
     <div id="camera-page">
-        <button id="back-button">Back</button>
+        <button id="back-button" class="button">Back</button>
         <h1>Live Camera Feed</h1>
         <video id="video" width="640" height="480" autoplay></video>
         <div id="result"></div>

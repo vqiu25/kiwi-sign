@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, session
 import base64
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.secret_key = 'your_secret_key'
 
 words = {
