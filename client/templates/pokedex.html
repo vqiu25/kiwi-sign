@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pokedex</title>
+    <title>Sign Language Dex</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pokedex.css') }}">
     <script src="{{ url_for('static', filename='js/pokedex.js') }}" defer></script>
 </head>
 <body>
-    <h1>Pokedex</h1>
+    <h1>Sign Language Dex</h1>
     <div class="scroll-container">
         <button class="scroll-button left" onclick="scrollContainer('left')">❮</button>
         <div class="container">
@@ -14,22 +14,27 @@
                 <div class="card" onclick="navigateTo('/category/greetings')">
                     <span class="icon">👋</span>
                     <h2>Greetings</h2>
+                    <p>Learn basic greeting signs.</p>
                 </div>
                 <div class="card" onclick="navigateTo('/category/numbers')">
                     <span class="icon">🔢</span>
                     <h2>Numbers</h2>
+                    <p>Master sign language numbers.</p>
                 </div>
                 <div class="card" onclick="navigateTo('/category/days')">
-                    <span class="icon">☀️</span>
+                    <span class="icon">📆</span>
                     <h2>Days of the Week</h2>
+                    <p>Practice days of the week signs.</p>
                 </div>
                 <div class="card" onclick="navigateTo('/category/months')">
-                    <span class="icon">📆</span>
+                    <span class="icon">📅</span>
                     <h2>Months</h2>
+                    <p>Learn sign language months.</p>
                 </div>
                 <div class="card" onclick="navigateTo('/category/terms')">
                     <span class="icon">📘</span>
                     <h2>Common Terms</h2>
+                    <p>Understand common sign language terms.</p>
                 </div>
             </ul>
         </div>
