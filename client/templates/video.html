@@ -9,14 +9,23 @@
 </head>
 
 <body>
-    <div id="loading">Loading...</div>
+    <div id="loading"></div>
     <div id="video" style="display:none;">
-        <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" onload="hideLoadingSymbol()">
+        <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" class="video-feed" onload="hideLoadingSymbol()">
+        <div class="button-container">
+            <button id="back-button" class="button">Back</button>
+            <div id="output">Waiting for gesture...</div>
+        </div>
     </div>
-    <div id="output">Waiting for gesture...</div>
 
     <script>
+        const backButton = document.getElementById('back-button');
         const outputDiv = document.getElementById('output');
+
+        backButton.addEventListener('click', () => {
+            window.location.href = '/';
+        });
+
         function updateGesture() {
             fetch('/get_gesture')
                 .then(response => response.json())
