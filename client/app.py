@@ -31,7 +31,6 @@ def generate_frames():
     cap = cv2.VideoCapture(0)
     try:
         while True:
-            prediction = None
             ret, frame = cap.read()
             if not ret:
                 break
@@ -58,8 +57,9 @@ def generate_frames():
 
                 if len(data_aux) == 84:
                     prediction = model.predict([np.asarray(data_aux)])
-                    # print(f"Predicted Gesture: {prediction}")
-
+            else:
+                prediction = None
+                
             _, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
