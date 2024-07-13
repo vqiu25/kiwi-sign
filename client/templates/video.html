@@ -12,7 +12,7 @@
     <div id="loading"></div>
     <div id="message-container">
         <div id="message-content"></div>
-    </div>    
+    </div>
     <div id="video" style="display:none;">
         <h1>Welcome to the our sign language interpter</h1>
 
@@ -31,6 +31,8 @@
     <script>
         const outputDiv = document.getElementById('output');
         const translateDiv = document.getElementById('translation');
+        const seenWords = new Set();
+
         function updateGesture() {
             fetch('/get_gesture')
                 .then(response => response.json())
@@ -49,8 +51,13 @@
                 .then(data => {
                     const holdDiv = document.getElementById('hold');
                     if (data.gesture == true) {
-                        holdDiv.innerHTML = 'gesture held for 3 seconds';
-                        triggerConfetti();
+                        if (seenWords.has(data.gesture)) {
+                            holdDiv.innerHTML = 'Gesture held for 3 seconds';
+                        } else {
+                            holdDiv.innerHTML = 'Gesture held for 3 seconds';
+                            triggerConfetti();
+                        }
+                        seenWords.add(data.gesture)
                     } else {
                         holdDiv.innerHTML = 'Hold a gesture for 3 seconds';
                     }
@@ -129,8 +136,9 @@
 
             setTimeout(() => {
                 messageContainer.style.top = '-100px'; // Slide out the message container
-            }, 4000); 
+            }, 4000);
         }
     </script>
 </body>
+
 </html>

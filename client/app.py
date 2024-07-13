@@ -193,8 +193,6 @@ def get_gesture():
 @app.route('/pokedex')
 def pokedex():
     seen_words = read_seen_words()
-    print('triggering pokedex')
-    print(seen_words)
     return render_template('pokedex.html', words=words, seen_words=seen_words)
 
 @app.route('/category/<category>')
