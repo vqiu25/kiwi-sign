@@ -31,6 +31,7 @@ def generate_frames():
     cap = cv2.VideoCapture(0)
     try:
         while True:
+            prediction = None
             ret, frame = cap.read()
             if not ret:
                 break

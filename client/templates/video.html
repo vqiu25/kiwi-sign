@@ -11,14 +11,15 @@
     <div id="video">
         <img src="{{ url_for('video_feed') }}" alt="Webcam Feed">
     </div>
-    <div id="output">Waiting for gesture...</div>
-
+    <div id="output"></div>
+    <button onclick="window.location.href='/'" class="button">Back</button>
     <script>
         const outputDiv = document.getElementById('output');
         function updateGesture() {
             fetch('/get_gesture')
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data.gesture);
                     outputDiv.innerHTML = 'Predicted Gesture: ' + data.gesture;
                 })
                 .catch(error => console.error('Error:', error));
