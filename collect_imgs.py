@@ -1,12 +1,11 @@
 import os
 import cv2
 
-DATA_DIR = './data'
+DATA_DIR = './data-sample'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
-# 0 - 10
-number_of_classes = 11
+number_of_classes = 1
 dataset_size = 100
 
 cap = cv2.VideoCapture(0)  # Make sure this index is correct for your camera
