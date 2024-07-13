@@ -16,7 +16,7 @@ body {
     margin: 0 auto;
 }
 .seen {
-    color: green;
+    color: white;
 }
 .cards {
     display: flex;
@@ -80,6 +80,25 @@ body {
     overflow: hidden;
 }
 
+.button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #3A6552; /* Match button background color */
+    background-image: linear-gradient(to right, #3A6552, #0ba360, #3cba92, #30dd8a); /* Match button gradient */
+    color: #fff; /* Match button text color */
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 200px; /* Match button border-radius */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Poppins', sans-serif; /* Match button font */
+    font-weight: 700;
+}
+
+.button:hover {
+    background-color: #3cba92; /* Adjust hover effect to one of the gradient colors */
+}
 
 a{
 text-decoration: none;
