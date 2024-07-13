@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Live Camera Feed</title>
+    <title>KIWI SIGN</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <style>
         #camera-page, #pokedex-page {
@@ -10,24 +10,30 @@
         #new-word-unlocked {
             color: red;
         }
+        .button-description {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-top: 0.3rem;
+            color: #fff;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <img src="{{ url_for('static', filename='gallery/NZSL.png') }}" alt="logo">
     <div id="home-page">
-        <h1>Welcome to the Live Camera Feed</h1>
+        <h1>Welcome to KiwiSign</h1>
         <div class="button-container">
-            <button onclick="window.location.href='/video'" class="button" id="start-camera">Start Camera</button><br>
-            <button onclick="window.location.href='/pokedex'" class="button">Pokedex</button>
+            <button onclick="window.location.href='/video'" class="button" id="start-camera">
+                Start Live Signing
+                <span class="button-description">This action will open your camera.</span>
+            </button>
+            <button onclick="window.location.href='/pokedex'" class="button">
+                My Signdex
+                <span class="button-description">View your unlocked words.</span>
+            </button>
         </div>
-    </div>
-    <div id="camera-page">
-        <button id="back-button" class="button">Back</button>
-        <h1>Live Camera Feed</h1>
-        <video id="video" width="960" height="720" autoplay></video>
-        <div id="result"></div>
-        <div id="translated-result"></div>
-        <div id="new-word-unlocked"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>

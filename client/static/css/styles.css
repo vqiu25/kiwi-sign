@@ -60,8 +60,8 @@ h1 {
 .button {
     position: relative;
     overflow: hidden;
-    height: 3rem;
-    padding: 0 2rem;
+    height: 4rem;
+    padding: 0 2.5rem;
     background: #3A6552;
     background-image: linear-gradient(to right, #3A6552, #0ba360, #3cba92, #30dd8a);
     color: #fff;
@@ -72,7 +72,14 @@ h1 {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-style: normal;
-    border-radius: 200px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background-position: right;
 }
 
 #loading {
