@@ -1,11 +1,13 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, jsonify
 import cv2
 import mediapipe as mp
 import pickle
 import numpy as np
 import warnings
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 # Suppress specific deprecation warnings from protobuf
 warnings.filterwarnings("ignore", category=UserWarning, message=".*GetPrototype.*")
@@ -20,7 +22,9 @@ hands = mp_hands.Hands(static_image_mode=False, max_num_hands=2, min_detection_c
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
+prediction = None
 def generate_frames():
+    global prediction
     cap = cv2.VideoCapture(0)
     try:
         while True:
@@ -50,7 +54,7 @@ def generate_frames():
 
                 if len(data_aux) == 84:
                     prediction = model.predict([np.asarray(data_aux)])
-                    print(f"Predicted Gesture: {prediction}")
+                    # print(f"Predicted Gesture: {prediction}")
 
             _, buffer = cv2.imencode('.jpg', frame)
             frame = buffer.tobytes()
@@ -67,6 +71,14 @@ def index():
 @app.route('/video_feed')
 def video_feed():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+# @socketio.on('frame')
+# def handle_frame(data):
+#     emit('response', {'prediction': prediction})
+
+@app.route('/get_gesture')
+def get_gesture():
+    return jsonify(gesture=str(prediction))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hand Gesture Recognition</title>
 </head>
+
 <body>
     <div id="video">
         <img src="{{ url_for('video_feed') }}" alt="Webcam Feed">
     </div>
-    <div id="output"></div>
+    <div id="output">Waiting for gesture...</div>
+
+    <script>
+        const outputDiv = document.getElementById('output');
+        function updateGesture() {
+            fetch('/get_gesture')
+                .then(response => response.json())
+                .then(data => {
+                    outputDiv.innerHTML = 'Predicted Gesture: ' + data.gesture;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        setInterval(updateGesture, 1); // Update gesture every 500ms
+    </script>
 </body>
+
 </html>
