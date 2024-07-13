@@ -2,21 +2,18 @@
 <html>
 <head>
     <title>Pokedex</title>
-    <style>
-        .seen {
-            color: green;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pokedex.css') }}"></head>
 <body>
     <button onclick="window.location.href='/'">Back</button>
     <h1>Pokedex</h1>
-    <ul>
-        <li><a href="/category/greetings" class="{% if 'greetings' in seen_words %}seen{% endif %}">Greetings</a></li>
-        <li><a href="/category/numbers" class="{% if 'numbers' in seen_words %}seen{% endif %}">Numbers</a></li>
-        <li><a href="/category/days" class="{% if 'days' in seen_words %}seen{% endif %}">Days of the Week</a></li>
-        <li><a href="/category/months" class="{% if 'months' in seen_words %}seen{% endif %}">Months</a></li>
-        <li><a href="/category/terms" class="{% if 'terms' in seen_words %}seen{% endif %}">Common Terms</a></li>
-    </ul>
+    <div class="container">
+        <ul class="category">
+            <li><a href="/category/greetings" class="{% if 'greetings' in seen_words %}seen{% endif %}">Greetings</a></li>
+            <li><a href="/category/numbers" class="{% if 'numbers' in seen_words %}seen{% endif %}">Numbers</a></li>
+            <li><a href="/category/days" class="{% if 'days' in seen_words %}seen{% endif %}">Days of the Week</a></li>
+            <li><a href="/category/months" class="{% if 'months' in seen_words %}seen{% endif %}">Months</a></li>
+            <li><a href="/category/terms" class="{% if 'terms' in seen_words %}seen{% endif %}">Common Terms</a></li>
+        </ul>
+    </div>
 </body>
 </html>
