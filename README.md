@@ -16,7 +16,11 @@ Kiwi Sign is a project developed for the DEVS Hackathon 2024. It utilises an ML 
   * **Greetings**: Hello, Goodbye, Thank you
   * **Terms**: Mountain, Marae, Food
 * An ML model that can provide live translation from NZSL to English and Te Reo
-* A SignDex which records all hand signs recognised by the user
+* A SignDex, which records all hand signs recognised by the user
+
+## Video
+
+https://github.com/user-attachments/assets/dd2f6817-ae6e-4ca4-a5d7-13132a92ab51
 
 ## Acknowledgements
 
