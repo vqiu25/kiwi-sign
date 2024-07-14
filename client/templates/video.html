@@ -36,8 +36,7 @@
                 .then(response => response.json())
                 .then(data => {
                     let gest = processString(data.gesture);
-                    outputDiv.innerHTML = 'Predicted Gesture: ' + gest;
-                    translateDiv.innerHTML = translate(gest);
+                    outputDiv.innerHTML = 'Predicted Gesture: ' + gest + ' / ' + translate(gest);
                 })
                 .catch(error => console.error('Error:', error));
         }
@@ -118,7 +117,7 @@
                 ["Seven", "Whitu"],
                 ["Eight", "Waru"],
                 ["Nine", "Iwa"],
-                ["Ten", "tekau"],
+                ["Ten", "Tekau"],
                 ["Monday", "Rāhina"],
                 ["Tuesday", "Rātū"],
                 ["Wednesday", "Rāapa"],
