@@ -36,7 +36,12 @@
                 .then(response => response.json())
                 .then(data => {
                     let gest = processString(data.gesture);
-                    outputDiv.innerHTML = 'Predicted Gesture: ' + gest + ' / ' + translate(gest);
+                    if (gest.toLowerCase() === "none") {
+                        outputDiv.innerHTML = "Waiting for gesture...";
+                        translateDiv.innerHTML = "";
+                    } else {
+                        outputDiv.innerHTML = 'Predicted Gesture: ' + gest + ' / ' + translate(gest);
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         }
