@@ -22,7 +22,6 @@
         <img src="{{ url_for('video_feed') }}" alt="Webcam Feed" class="video-feed" onload="hideLoadingSymbol()">
         <div class="button-container">
             <div id="output">Waiting for gesture...</div>
-            <div id="hold"></div>
             <div id="translation"></div>
             <button onclick="window.location.href='/'" class="signdex-button">Back</button>
         </div>
@@ -31,7 +30,6 @@
     <script>
         const outputDiv = document.getElementById('output');
         const translateDiv = document.getElementById('translation');
-        const seenWords = new Set();
 
         function updateGesture() {
             fetch('/get_gesture')
@@ -49,17 +47,8 @@
             fetch('/gesture_status')
                 .then(response => response.json())
                 .then(data => {
-                    const holdDiv = document.getElementById('hold');
                     if (data.gesture == true) {
-                        if (seenWords.has(data.gesture)) {
-                            holdDiv.innerHTML = 'Gesture held for 3 seconds';
-                        } else {
-                            holdDiv.innerHTML = 'Gesture held for 3 seconds';
-                            triggerConfetti();
-                        }
-                        seenWords.add(data.gesture)
-                    } else {
-                        holdDiv.innerHTML = 'Hold a gesture for 3 seconds';
+                        triggerConfetti();
                     }
                 })
                 .catch(error => console.error('Error:', error));
@@ -83,21 +72,53 @@
                 ["Goodbye", "Haere rā"],
                 ["Thank you", "Ngā mihi"],
                 ["A", "Ā"],
-                ["E", "Ē"],
-                ["I", "Ī"],
+                ["B", "Bī"],
+                ["C", "Sī"],
+                ["D", "Dī"],
+                ["E", "Ī"],
+                ["F", "Eufi"],
+                ["G", "Jī"],
+                ["H", "Eichi"],
+                ["I", "Āi"],
+                ["J", "Jeī"],
+                ["K", "Kēi"],
+                ["L", "El"],
+                ["M", "Em"],
+                ["N", "En"],
                 ["O", "Ō"],
-                ["U", "Ū"],
-                ["0", "Kore"],
-                ["1", "Tahi"],
-                ["2", "Rua"],
-                ["3", "Toru"],
-                ["4", "Whā"],
-                ["5", "Rima"],
-                ["6", "Ono"],
-                ["7", "Whitu"],
-                ["8", "Waru"],
-                ["9", "Iwa"],
-                ["10", "tekau"],
+                ["P", "Pī"],
+                ["Q", "Kū"],
+                ["R", "Ār"],
+                ["S", "Es"],
+                ["T", "Tī"],
+                ["U", "Yū"],
+                ["V", "Vī"],
+                ["W", "Dabliū"],
+                ["X", "Eks"],
+                ["Y", "Wai"],
+                ["Z", "Zed"],
+                // ["0", "Nū"],
+                // ["1", "Tahi"],
+                // ["2", "Rua"],
+                // ["3", "Toru"],
+                // ["4", "Whā"],
+                // ["5", "Rima"],
+                // ["6", "Ono"],
+                // ["7", "Whitu"],
+                // ["8", "Waru"],
+                // ["9", "Iwa"],
+                // ["10", "Tekau"],
+                ["Zero", "Nū"],
+                ["One", "Tahi"],
+                ["Two", "Rua"],
+                ["Three", "Toru"],
+                ["Four", "Whā"],
+                ["Five", "Rima"],
+                ["Six", "Ono"],
+                ["Seven", "Whitu"],
+                ["Eight", "Waru"],
+                ["Nine", "Iwa"],
+                ["Ten", "tekau"],
                 ["Monday", "Rāhina"],
                 ["Tuesday", "Rātū"],
                 ["Wednesday", "Rāapa"],

@@ -22,17 +22,16 @@ words = {
         "Thank you": "Ngā mihi"
     },
     "numbers": {
-        "0": "Kore",
-        "1": "Tahi",
-        "2": "Rua",
-        "3": "Toru",
-        "4": "Whā",
-        "5": "Rima",
-        "6": "Ono",
-        "7": "Whitu",
-        "8": "Waru",
-        "9": "Iwa",
-        "10": "Tekau"
+        "One": "Tahi",
+        "Two": "Rua",
+        "Three": "Toru",
+        "Four": "Whā",
+        "Five": "Rima",
+        "Six": "Ono",
+        "Seven": "Whitu",
+        "Eight": "Waru",
+        "Nine": "Iwa",
+        "Ten": "Tekau"
     },
     "alphabet": {
         "A": "Ā",
