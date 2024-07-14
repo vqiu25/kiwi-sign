@@ -5,3 +5,4 @@ create_dataset.py
 drawing.py
 inference_classifier.py
 train_classifier.py
+client/database.txt
