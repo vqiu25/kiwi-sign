@@ -161,3 +161,25 @@ h1 {
     font-size: 18px;
     color: #333;
 }
+
+
+/* Add the styles for the signdex-button */
+.signdex-button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #3A6552;
+    background-image: linear-gradient(to right, #3A6552, #0ba360, #3cba92, #30dd8a);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 200px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.signdex-button:hover {
+    background-color: #3cba92;
+}
