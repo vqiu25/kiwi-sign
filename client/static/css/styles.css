@@ -16,7 +16,9 @@ p {
     color: #3A6552;
 }
 
-#output, #hold, #translation {
+#output,
+#hold,
+#translation {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     color: #3A6552;
@@ -25,16 +27,19 @@ p {
 /* CSS for message container */
 #message-container {
     position: fixed;
-    top: -100px; /* Start off-screen */
+    top: -100px;
+    /* Start off-screen */
     left: 50%;
     transform: translateX(-50%);
-    background-color: #00a2ff;
+    background-color: #446453;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 200px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: top 0.5s ease; /* Smooth transition effect */
-    z-index: 1000; /* Ensure it's above other content */
+    transition: top 0.5s ease;
+    /* Smooth transition effect */
+    z-index: 1000;
+    /* Ensure it's above other content */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,12 +48,13 @@ p {
 /* CSS for message content */
 #message-content {
     font-family: 'Poppins', sans-serif;
-    color: #fff; 
+    color: #fff;
 }
 
 /* Animation for slide-in effect */
 .slide-in {
-    top: 20px; /* Adjust position where it should slide in */
+    top: 20px;
+    /* Adjust position where it should slide in */
 }
 
 img {
@@ -86,7 +92,7 @@ h1 {
 
 .home-text {
     text-align: center;
-    margin: 3px auto; 
+    margin: 3px auto;
     max-width: 600px;
 }
 
@@ -149,10 +155,15 @@ h1 {
     height: 120px;
     animation: spin 2s linear infinite;
 }
-  
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #result,
@@ -186,7 +197,8 @@ h1 {
 
 .video-feed {
     width: 100%;
-    max-width: 800px; /* Set a max-width to keep it responsive */
+    max-width: 800px;
+    /* Set a max-width to keep it responsive */
     height: auto;
     border-radius: 15px;
 }
