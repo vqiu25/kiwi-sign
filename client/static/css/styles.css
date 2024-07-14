@@ -108,8 +108,8 @@ h1 {
 .button {
     position: relative;
     overflow: hidden;
-    height: 3rem;
-    padding: 0 2rem;
+    height: 5rem;
+    padding: 0 3rem;
     background: #3A6552;
     background-image: linear-gradient(to right, #3A6552, #0ba360, #3cba92, #30dd8a);
     color: #fff;
@@ -119,8 +119,26 @@ h1 {
     margin-bottom: 10px;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
-    font-style: normal;
+    font-size: 1.2rem;
     border-radius: 200px;
+    transition: background 0.3s, transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover {
+    background-position: right;
+    transform: scale(1.05);
+}
+
+.button-description {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 #loading {
