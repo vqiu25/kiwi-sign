@@ -20,7 +20,7 @@ Kiwi Sign is a project developed for the DEVS Hackathon 2024. It utilises an ML 
 
 ## Video
 
-https://github.com/user-attachments/assets/dd2f6817-ae6e-4ca4-a5d7-13132a92ab51
+https://github.com/user-attachments/assets/3e283cd4-6b90-45d8-88b6-e0869671aa15
 
 ## Acknowledgements
 
